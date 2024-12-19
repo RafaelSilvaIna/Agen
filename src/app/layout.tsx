@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import { Inter } from 'next/font/google'
 import "./globals.css"
+import Sidebar from "@/components/Sidebar"
 import Header from "@/components/Header"
-import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Agen - Plataforma de Agendamento",
-  description: "Agende horários, avalie serviços e gerencie sua empresa com a Agen",
+  description: "Agende seus compromissos de forma fácil e rápida com a Agen",
 }
 
 export default function RootLayout({
@@ -18,12 +18,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt">
-      <body className={`${inter.className} bg-white text-black`}>
-        <Header />
-        {children}
-        <Footer />
+      <body className={inter.className}>
+        <div className="flex h-screen bg-gray-100">
+          <Sidebar />
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <Header />
+            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+              {children}
+            </main>
+          </div>
+        </div>
       </body>
     </html>
   )
 }
-
