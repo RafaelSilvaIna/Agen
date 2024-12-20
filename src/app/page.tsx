@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Menu, X, CheckCircle, Shield, Users, Calendar, Clock, BarChart } from 'lucide-react'
@@ -17,10 +16,7 @@ export default function Home() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image src="/public/logo.png" alt="Agen Logo" width={40} height={40} />
-            <span className="text-2xl font-bold text-gray-800">Agen</span>
-          </Link>
+          <Link href="/" className="text-2xl font-bold text-gray-800">Agen</Link>
           <nav className="hidden md:flex space-x-6">
             <Link href="/about" className="text-gray-600 hover:text-gray-800">Sobre</Link>
             <Link href="/features" className="text-gray-600 hover:text-gray-800">Funcionalidades</Link>
@@ -28,8 +24,12 @@ export default function Home() {
             <Link href="/support" className="text-gray-600 hover:text-gray-800">Suporte</Link>
           </nav>
           <div className="flex items-center space-x-4">
-            <Button variant="outline">Entrar</Button>
-            <Button>Experimente Grátis</Button>
+            <Button variant="outline" asChild>
+              <Link href="/login">Entrar</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/register">Cadastrar</Link>
+            </Button>
           </div>
           <button className="md:hidden" onClick={toggleSidebar}>
             <Menu className="h-6 w-6 text-gray-600" />
@@ -78,7 +78,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Button size="lg">Experimente Grátis</Button>
+            <Button size="lg" asChild>
+              <Link href="/register">Experimente Grátis</Link>
+            </Button>
             <Button size="lg" variant="outline">Saiba Mais</Button>
           </motion.div>
         </section>
@@ -112,32 +114,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Social Proof Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">O que nossos clientes dizem</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { name: "Maria Silva", company: "Salão Beleza Total", quote: "O Agen revolucionou a forma como gerencio meus agendamentos. Não consigo imaginar meu negócio sem ele!" },
-                { name: "João Santos", company: "Clínica Saúde Plena", quote: "A eficiência do Agen nos permitiu aumentar o número de pacientes atendidos em 30%. Incrível!" },
-                { name: "Ana Oliveira", company: "Studio Fitness", quote: "Com o Agen, reduzi as faltas em 50% e melhorei a satisfação dos clientes. Recomendo a todos!" },
-              ].map((testimonial, index) => (
-                <motion.div 
-                  key={index} 
-                  className="bg-white p-6 rounded-lg shadow-md"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                >
-                  <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
-                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                  <div className="text-sm text-gray-500">{testimonial.company}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="bg-blue-600 text-white py-16">
           <div className="container mx-auto px-4 text-center">
@@ -148,12 +124,13 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Button size="lg" variant="secondary" className="mr-4">Iniciar Teste Grátis</Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-blue-600">Agendar Demonstração</Button>
+              <Button size="lg" variant="secondary" className="mr-4" asChild>
+                <Link href="/register">Iniciar Teste Grátis</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-blue-600">
+                Agendar Demonstração
+              </Button>
             </motion.div>
-            <div className="mt-8">
-              <Image src="/novoero.png" alt="Floresta" width={300} height={200} className="mx-auto rounded-lg shadow-lg" />
-            </div>
           </div>
         </section>
 
